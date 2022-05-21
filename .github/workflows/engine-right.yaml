@@ -1,0 +1,21 @@
+name: Engine Right
+on:
+  workflow_dispatch:
+    inputs:
+      commitHash:
+        description: >
+          Paste the commit hash here of any commit on any branch or leave
+          blank for the latest one on the main branch.
+        default: main
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.2
+      - name: Deploy
+        run: |
+          sleep 60
+          exit 1

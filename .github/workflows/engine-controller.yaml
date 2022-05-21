@@ -1,0 +1,32 @@
+name: Engine Controller
+on:
+  workflow_call:
+    inputs:
+      repository:
+        description: "Repository in the form owner/repository-name"
+        type: string
+        required: true
+      workflow:
+        description: "Workflow name or file name"
+        type: string
+        required: true
+    secrets:
+      githubToken:
+        required: true
+        description: GitHub Token
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.2
+      - name: Start Workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.githubToken }}
+        run: ./bin/engine ${{ inputs.repository }} ${{ inputs.workflow }}

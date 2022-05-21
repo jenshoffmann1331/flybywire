@@ -1,0 +1,163 @@
+name: FlyByWire
+on:
+  workflow_dispatch:
+    inputs:
+      startTheEngines:
+        description: >
+          Start all the engines. Yes means No and No means Yes.
+        default: No
+        required: true
+
+jobs:
+
+#  bootstrap-base:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_aws-bootstrap-cdk
+#      workflow: deploy-base.yaml
+#
+#  bootstrap-pacman:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_aws-bootstrap-cdk
+#      workflow: deploy-pacman.yaml
+#
+#  bootstrap-paymentinfo:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_aws-bootstrap-cdk
+#      workflow: deploy-paymentinfo.yaml
+#
+#  bootstrap-mongo:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+  #    with:
+#      repository: otto-ec/pacman_aws-bootstrap-cdk
+#      workflow: deploy-mongo.yaml
+#
+#  backup:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+  #    with:
+#      repository: otto-ec/pacman_backup
+#      workflow: deploy.yaml
+#
+#  spoc-reporting:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+  #    with:
+#      repository: otto-ec/pacman_spoc-reporting
+#      workflow: deploy.yaml
+#
+#  teams-alarming:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+  #    with:
+#      repository: otto-ec/pacman_teams-alarming-lambda
+#      workflow: deploy.yaml
+#
+#  secrets-watcher:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_secrets-watcher
+#      workflow: deploy.yaml
+#
+#  paymentinfo-liabilities:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_paymentinfo-liabilities
+#      workflow: deploy.yaml
+#
+#  paymentinfo-paymentinfo-ui:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_paymentinfo-paymentinfo-ui
+#      workflow: deploy.yaml
+#
+#  aws-metrics:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_aws-metrics
+#      workflow: deploy.yaml
+#
+#  github-metrics:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_github-metrics
+#      workflow: deploy.yaml
+#
+#  paymentinfo-eventreader-repayments:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_paymentinfo-eventreader
+#      workflow: deploy-claim-repayments-lambda.yaml
+#
+#  paymentinfo-eventreader-claims:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_paymentinfo-eventreader
+#      workflow: deploy-claims-lambda.yaml
+#
+#  paymentinfo-cdc:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_paymentinfo-cdc
+#      workflow: deploy.yaml
+#
+#  minikeeper:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_minikeeper
+#      workflow: deploy.yaml
+#
+#  grafana:
+#    uses: otto-ec/pacman_flybywire/.github/workflows/engine-controller.yaml@main
+#    secrets:
+#      githubToken: ${{ secrets.GH_TOKEN }}
+#    with:
+#      repository: otto-ec/pacman_grafana
+#      workflow: deploy.yaml
+
+  engine-left:
+    uses: jenshoffmann1331/recover/.github/workflows/engine-controller.yaml@main
+    secrets:
+      githubToken: ${{ secrets.GH_TOKEN }}
+    with:
+      repository: jenshoffmann1331/recover
+      workflow: engine-left.yaml
+
+  engine-right:
+    uses: jenshoffmann1331/recover/.github/workflows/engine-controller.yaml@main
+    secrets:
+      githubToken: ${{ secrets.GH_TOKEN }}
+    with:
+      repository: jenshoffmann1331/recover
+      workflow: engine-right.yaml

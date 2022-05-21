@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+repository=$1
+workflow=$2
+
+printUsage() {
+  echo "Usage: ${0} <REPOSITORY> <WORKFLOW>"
+  echo "Example: ${0} my-user/my-repo deploy.yaml"
+}
+
+validateInput() {
+  if [ -z "${repository}" ]; then
+    printUsage
+    exit 1
+  fi
+
+  if [ -z "${workflow}" ]; then
+    printUsage
+    exit 1
+  fi
+}
+
+getLastRunId() {
+  gh run list -R ${repository} --workflow=${workflow} --json databaseId --limit 1 | jq '.[].databaseId' -r
+}
+
+startWorkflow() {
+  lastRunId=$(getLastRunId)
+  gh workflow run -R ${repository} ${workflow}
+  runId=$(getLastRunId)
+  while [ "${runId}" == "${lastRunId}" ]; do
+    sleep 5
+    runId=$(getLastRunId)
+  done
+  printf ${runId}
+}
+
+startEngine() {
+  runExitStatus=1
+  while [ $runExitStatus -ne 0 ]; do
+    runId=$(startWorkflow)
+    echo "Workflow run: https://github.com/${repository}/actions/runs/${runId}"
+    gh run watch --exit-status -R ${repository} ${runId}
+    runExitStatus=$?
+  done
+}
+
+validateInput
+startEngine
